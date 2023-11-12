@@ -1,18 +1,18 @@
 void main(List<String> args) {
   //
-  String name = 'Jose';
-  final nombre = "David";
-  const texto = ''' 
-  con salto
-  de lineas
-  ''';
+  // String name = 'Jose';
+  // final nombre = "David";
+  // const texto = ''' 
+  // con salto
+  // de lineas
+  // ''';
 
   //METODOS
   //--> parseo
-  int num = 3;
-  double decimal = 63.819111111;
-  String tres = num.toString();
-  String strDecimal = decimal.toStringAsFixed(5);
+  // int num = 3;
+  // double decimal = 63.819111111;
+  // String tres = num.toString();
+  // String strDecimal = decimal.toStringAsFixed(5);
   
   String refran = ''' ya veremos dijo el ciego ''';
   print(refran.contains('ciegos'));//evalua si la variable contiene esa palabra 
