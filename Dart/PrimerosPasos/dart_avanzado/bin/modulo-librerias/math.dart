@@ -2,11 +2,11 @@ import 'dart:math';
 
 void main(List<String> args) {
   //constante
-  var PI = pi;
+  // var PI = pi;
   var raizDos = sqrt2;
   print(raizDos);
 
-  var arCirculo = (pi * (2 * 2));
+  // var arCirculo = (pi * (2 * 2));
 
   //raiz cuadrada
   var num = sqrt(64);
