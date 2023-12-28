@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart'; //libreria para usar los widgets
+
+void main() {
+  runApp(const MaterialApp(
+    //una aplicacion basada en material
+    title: 'Hola mundo app',
+    home: SafeArea(child: MyHelloWorldApp()),
+  ));
+}
+
+class MyHelloWorldApp extends StatelessWidget {
+  const MyHelloWorldApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: Column(
+        //puede tener varios hijos
+        children: [
+          Container(
+            //solo puede tener un hijo
+            height: 80,
+            padding: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(color: Colors.green),
+            child: const Row(
+              children: [
+                IconButton(
+                  onPressed: null,
+                  icon: Icon(Icons.menu),
+                  tooltip: "Boton de navegación",
+                  iconSize: 50,
+                ),
+                Expanded(child: Text("Mi primera aplicacion Hola mundo")),
+                IconButton(
+                  onPressed: null,
+                  icon: Icon(Icons.search),
+                  tooltip: "Boton de busqueda",
+                )
+              ],
+            ),
+          ),
+          const Expanded(
+            child: Center(
+              child: Text("Hola mundo"),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
