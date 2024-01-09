@@ -14,11 +14,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           fontFamily: 'Urbanist',
           scaffoldBackgroundColor: AppColors.background),
-      home: LoginPage(),
-      initialRoute: '/',
+      home: HomePage(),
       routes: {
-        '/': (context) => LoginPage(),
-        '/home': (context) => const HomePage(),
+        '/home': (context) => const LoginPage(),
       },
     );
   }

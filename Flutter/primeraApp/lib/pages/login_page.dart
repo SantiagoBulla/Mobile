@@ -83,7 +83,7 @@ class LoginPage extends StatelessWidget {
                       //     .push(MaterialPageRoute(builder: (context) {
                       //   return HomePage();
                       // }));
-                      Navigator.of(context).pushNamed('/home');
+                      Navigator.of(context).pushReplacementNamed('/home');
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amber,
