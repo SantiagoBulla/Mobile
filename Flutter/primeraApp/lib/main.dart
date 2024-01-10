@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:primera_app/pages/home_page.dart';
 import 'package:primera_app/pages/login_page.dart';
+import 'package:primera_app/pages/main_page.dart';
 import 'package:primera_app/styles/app_colors.dart';
 
 /// Flutter code sample for [Scaffold].
@@ -14,9 +15,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           fontFamily: 'Urbanist',
           scaffoldBackgroundColor: AppColors.background),
-      home: HomePage(),
+      home: LoginPage(),
       routes: {
-        '/home': (context) => const LoginPage(),
+        '/home': (context) => const HomePage(),
+        '/main': (context) => const MainPage(),
       },
     );
   }

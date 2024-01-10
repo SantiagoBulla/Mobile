@@ -17,7 +17,9 @@ class HomePage extends StatelessWidget {
           Icon(Icons.person_2_outlined),
         ],
       ),
-      body: ListView(children: getUsersHttp(),)
+      body: ListView(
+        children: getUsersHttp(),
+      ),
     );
   }
 
@@ -37,7 +39,7 @@ class HomePage extends StatelessWidget {
 
   List<Widget> getUsersHttp() {
     List<Widget> users = [];
-    for (var i = 0; 1 < 20; i++) {
+    for (var i = 0; i < 50; i++) { 
       users.add(_userItem());
     }
     return users;
