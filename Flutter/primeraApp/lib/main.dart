@@ -14,7 +14,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
           fontFamily: 'Urbanist',
-          scaffoldBackgroundColor: AppColors.background),
+          scaffoldBackgroundColor: AppColors.background,
+          brightness: Brightness.dark),
+      //3:10:16
       home: LoginPage(),
       routes: {
         '/home': (context) => const HomePage(),
@@ -24,6 +26,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-void hello() {
-  print('hello');
-}
