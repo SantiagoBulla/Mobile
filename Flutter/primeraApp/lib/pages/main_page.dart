@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:primera_app/pages/home_page.dart';
+import 'package:primera_app/pages/profile_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -50,9 +51,15 @@ class _MainPageState extends State<MainPage> {
 
   final pages = [
     HomePage(),
-    Center(child: Text('favorite')),
-    Center(child: Text('Add post')),
-    Center(child: Text('Message')),
-    Center(child: Text('User')),
+    Center(
+      child: Text('favorite'),
+    ),
+    Center(
+      child: Text('Add post'),
+    ),
+    Center(
+      child: Text('Message'),
+    ),
+    ProfilePage(),
   ];
 }
