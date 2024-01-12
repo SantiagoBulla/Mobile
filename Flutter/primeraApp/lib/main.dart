@@ -16,10 +16,9 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Urbanist',
           scaffoldBackgroundColor: AppColors.background,
           brightness: Brightness.dark),
-      //3:10:16
       home: LoginPage(),
       routes: {
-        '/home': (context) => const HomePage(),
+        '/home': (context) =>  HomePage(),
         '/main': (context) => const MainPage(),
       },
     );

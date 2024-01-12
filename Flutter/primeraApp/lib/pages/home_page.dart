@@ -1,47 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:primera_app/components/post_item.dart';
 import 'package:primera_app/styles/app_colors.dart';
+import 'package:primera_app/styles/app_text.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  List<String> users = [];
 
   @override
   Widget build(BuildContext context) {
+    getUsersHttp();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.background,
-        foregroundColor: AppColors.white,
-        // don't use
-        title: Text('Titulo appbar'),
-        centerTitle: false,
-        actions: const [
-          Icon(Icons.person_2_outlined),
-        ],
-      ),
-      body: ListView(
-        children: getUsersHttp(),
-      ),
-    );
-  }
-
-  Widget _userItem() {
-    return Row(
-      children: [
-        Image.asset(
-          'assets/temp/user1.png',
-          height: 50,
-          width: 50,
+        appBar: AppBar(
+          backgroundColor: AppColors.background,
+          foregroundColor: AppColors.white,
+          // don't use
+          title: Text('Titulo appbar'),
+          centerTitle: false,
+          actions: const [
+            Icon(Icons.person_2_outlined),
+          ],
         ),
-        SizedBox(width: 16),
-        Text('Sarah Fernandez'),
-      ],
-    );
+        body: ListView.separated(
+          itemBuilder: (context, index) {
+            return PostItem(user: users[index]);
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(
+              height: 24,
+              width: 24,
+            );
+          },
+          itemCount: users.length,
+        ));
   }
 
-  List<Widget> getUsersHttp() {
-    List<Widget> users = [];
-    for (var i = 0; i < 50; i++) { 
-      users.add(_userItem());
+  getUsersHttp() {
+    for (var i = 0; i < 100; i++) {
+      users.add('user number $i');
     }
-    return users;
   }
 }
