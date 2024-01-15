@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:primera_app/components/toolbar.dart';
+import 'package:primera_app/components/user_avatar.dart';
+import 'package:primera_app/config/app_routes.dart';
 import 'package:primera_app/styles/app_colors.dart';
 import 'package:primera_app/styles/app_text.dart';
+
+enum ProfileMenu { edit, logout }
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -8,12 +13,41 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: Toolbar(
+        title: 'Profile',
+        actions: [
+          PopupMenuButton<ProfileMenu>(
+            onSelected: (value) {
+              switch (value) {
+                case ProfileMenu.edit:
+                  Navigator.of(context).pushNamed(AppRoutes.editProfile);
+                  break;
+                case ProfileMenu.logout:
+                  print('logout');
+                  break;
+              }
+            },
+            icon: const Icon(Icons.settings_outlined),
+            //definir el icon del popupmenubutton
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  child: Text('Edit'),
+                  value: ProfileMenu.edit,
+                ),
+                PopupMenuItem(
+                  child: Text('Log out'),
+                  value: ProfileMenu.logout,
+                ),
+              ];
+            },
+          ),
+        ],
+      ),
       body: Column(
         children: [
-          Image.asset(
-            'assets/temp/user1.png',
-            height: 90,
-            width: 90,
+          UserAvatar(
+            size: 90,
           ),
           Text(
             'Julieth Herrera',
@@ -30,7 +64,8 @@ class ProfilePage extends StatelessWidget {
             height: 24,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround, //ALINEACION DE LOS ELEMENTOS DE LA COLUMNA AL CENTRO
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //ALINEACION DE LOS ELEMENTOS DE LA COLUMNA AL CENTRO
             children: [
               Column(
                 children: [
@@ -61,7 +96,10 @@ class ProfilePage extends StatelessWidget {
               ),
             ],
           ),
-          Divider(thickness: 1, height: 24,),
+          Divider(
+            thickness: 1,
+            height: 24,
+          ),
           //3:39:00
         ],
       ),

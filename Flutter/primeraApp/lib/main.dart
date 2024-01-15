@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:primera_app/pages/home_page.dart';
-import 'package:primera_app/pages/login_page.dart';
-import 'package:primera_app/pages/main_page.dart';
+import 'package:primera_app/config/app_routes.dart';
+import 'package:primera_app/pages/edit_profile_page.dart';
+
 import 'package:primera_app/styles/app_colors.dart';
 
 /// Flutter code sample for [Scaffold].
@@ -16,11 +16,8 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Urbanist',
           scaffoldBackgroundColor: AppColors.background,
           brightness: Brightness.dark),
-      home: LoginPage(),
-      routes: {
-        '/home': (context) =>  HomePage(),
-        '/main': (context) => const MainPage(),
-      },
+      initialRoute: AppRoutes.login,
+      routes: AppRoutes.pages,
     );
   }
 }
