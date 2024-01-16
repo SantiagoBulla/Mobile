@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:primera_app/components/bottom_navigation_item.dart';
 import 'package:primera_app/config/app_icons.dart';
+import 'package:primera_app/models/token.dart';
 import 'package:primera_app/pages/home_page.dart';
 import 'package:primera_app/pages/profile_page.dart';
 import 'package:primera_app/styles/app_colors.dart';
 
+//6:26:13
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final Token token;
+
+  const MainPage({super.key, required this.token});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -21,7 +25,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
         extendBody: true,
         // convierte el bottomNavigationBar en una especie de menu flotante y hace que el body nazca desde la raiz de la pantalla
-        body: pages[currentIndex.index],
+        body: pages()[currentIndex.index],
         bottomNavigationBar: MyBottomNavigation(
           currentIndexIcon: currentIndex,
           onTap: (value) {
@@ -33,19 +37,19 @@ class _MainPageState extends State<MainPage> {
         ));
   }
 
-  final pages = [
-    HomePage(),
-    Center(
-      child: Text('favorite'),
-    ),
-    Center(
-      child: Text('Add post'),
-    ),
-    Center(
-      child: Text('Message'),
-    ),
-    ProfilePage(),
-  ];
+  pages() => [
+        HomePage(),
+        Center(
+          child: Text('favorite'),
+        ),
+        Center(
+          child: Text('Add post'),
+        ),
+        Center(
+          child: Text('Message'),
+        ),
+        ProfilePage(token: widget.token),
+      ];
 }
 
 enum Menus { home, favorite, add, messages, user }

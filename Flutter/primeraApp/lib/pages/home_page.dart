@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:primera_app/components/post_item.dart';
 import 'package:primera_app/components/toolbar.dart';
 import 'package:primera_app/config/app_icons.dart';
+import 'package:primera_app/config/app_routes.dart';
 import 'package:primera_app/styles/app_colors.dart';
 import 'package:primera_app/styles/app_text.dart';
 
@@ -20,7 +21,7 @@ class HomePage extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () {
-                  print('location icon');
+                  Navigator.of(context).pushNamed(AppRoutes.nearby);
                 },
                 icon: SvgPicture.asset(AppIcons.icLocation))
           ],

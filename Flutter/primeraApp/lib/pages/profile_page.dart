@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:primera_app/components/toolbar.dart';
 import 'package:primera_app/components/user_avatar.dart';
 import 'package:primera_app/config/app_routes.dart';
+import 'package:primera_app/models/token.dart';
 import 'package:primera_app/styles/app_colors.dart';
 import 'package:primera_app/styles/app_text.dart';
 
 enum ProfileMenu { edit, logout }
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final Token token;
+  const ProfilePage({super.key, required this.token});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,7 @@ class ProfilePage extends StatelessWidget {
             height: 12,
           ),
           Text(
-            'Colombia',
+            token.token,
             style: AppText.subtitle3,
           ),
           SizedBox(

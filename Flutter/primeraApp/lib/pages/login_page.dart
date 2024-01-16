@@ -1,19 +1,33 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:primera_app/config/app_icons.dart';
 import 'package:primera_app/config/app_routes.dart';
 import 'package:primera_app/config/app_strings.dart';
-import 'package:primera_app/pages/home_page.dart';
+import 'package:http/http.dart' as http;
+import 'package:primera_app/models/token.dart';
+import 'package:primera_app/pages/main_page.dart';
 
-// minute 1:30:37
+const baseURL = 'https://reqres.in';
+
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final loginRoute = '$baseURL/api/login';
+  final usernameController = TextEditingController();
+
+  // final passwordController = TextEditingController();
+  var password = '';
+
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height,
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Column(
@@ -36,8 +50,9 @@ class LoginPage extends StatelessWidget {
                 ),
                 const Spacer(),
                 TextField(
+                  controller: usernameController,
                   decoration: InputDecoration(
-                    hintText: 'Username',
+                    hintText: AppStrings.username,
                     border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
@@ -51,8 +66,10 @@ class LoginPage extends StatelessWidget {
                   height: 16,
                 ),
                 TextField(
+                  // controller: passwordController,
+                  onChanged: (value) => {password = value},
                   decoration: InputDecoration(
-                    hintText: 'Password',
+                    hintText: AppStrings.password,
                     border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
@@ -70,7 +87,7 @@ class LoginPage extends StatelessWidget {
                     },
                     style: TextButton.styleFrom(
                         foregroundColor: Colors.white //font color
-                        ),
+                    ),
                     child: Text(AppStrings.forgotPassword),
                   ),
                 ),
@@ -81,13 +98,18 @@ class LoginPage extends StatelessWidget {
                   height: 48,
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // Navigator.of(context)
                       //     .push(MaterialPageRoute(builder: (context) {
                       //   return HomePage();
                       // }));
-                      Navigator.of(context)
-                          .pushReplacementNamed(AppRoutes.main);
+                      // Navigator.of(context)
+                      //     .pushReplacementNamed(AppRoutes.main);
+                      final token = await doLogin();
+                      Navigator.of(context).push(PageRouteBuilder(pageBuilder: (
+                          context, animation, secondaryAnimation) {
+                        return MainPage(token: token);
+                      },));
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amber,
@@ -179,7 +201,7 @@ class LoginPage extends StatelessWidget {
                         print('sign up');
                       },
                       style:
-                          TextButton.styleFrom(foregroundColor: Colors.amber),
+                      TextButton.styleFrom(foregroundColor: Colors.amber),
                       child: const Text(
                         AppStrings.signup,
                         style: TextStyle(
@@ -196,6 +218,29 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<Token> doLogin() async {
+    final username = usernameController.text;
+    // final password = passwordController.text;
+    final body = {'email': username, 'password': password};
+    final response = await http.post(
+      Uri.parse(loginRoute),
+      body: body,
+    );
+    if (response.statusCode == 200) {
+      print(response.body);
+      print('La response es : ${response.body}');
+      var json = jsonDecode(response.body);
+      var resClass = Token.fromJson(json);
+      print('La response  en json es : ${json['token']}');
+      print('La response  en json class es : ${resClass.token}');
+
+      return resClass;
+    } else {
+      print('You have an error');
+      throw Exception('ERROR');
+    }
   }
 }
 
